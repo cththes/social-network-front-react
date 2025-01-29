@@ -1,0 +1,34 @@
+.dialog {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dialog:hover {
+    background-color: #d5dbdb;
+  }
+  
+  .dialog__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .dialog__link {
+    color: #2c3e50;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  .dialog__link:hover {
+    color: #2980b9;
+  }
+  
+  .active {
+    color: #2980b9;
+    font-weight: bold;
+  }

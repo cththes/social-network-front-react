@@ -14,7 +14,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Profile />} />
-          <Route path="/dialogs" element={<Dialogs />} />
+          <Route path="/messages" element={<Dialogs />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/news" element={<Profile />} />
           <Route path="/music" element={<Profile />} />
