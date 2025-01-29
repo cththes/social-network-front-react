@@ -1,0 +1,17 @@
+.profile__content {
+  grid-area: content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Распределение контента: верх и низ */
+  background-color: #ecf0f1;
+  color: #2c3e50;
+  padding: 20px;
+  border: 1px solid #bdc3c7;
+  border-radius: 8px;
+  overflow-y: auto;
+}
+
+.profile__main-content {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
