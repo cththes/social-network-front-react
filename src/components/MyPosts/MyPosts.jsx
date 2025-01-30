@@ -2,16 +2,29 @@ import React from "react";
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
-export default function MyPosts() {
+export default function MyPosts({ profile, addPost, updatePostInput }) {
+  const handlePostSubmit = () => {
+    addPost(profile.newPostText);
+  };
+
+  const handlePostInputChange = (e) => {
+    updatePostInput(e.target.value);
+  };
+
   return (
     <div className={styles["my-posts"]}>
       <h2 className={styles["my-posts__title"]}>My Posts</h2>
-      <textarea className={styles["my-posts__textarea"]}></textarea>
-      <button className={styles["my-posts__button"]}>Добавить пост</button>
-      <Post message="Tomorrow can take care of itself." />
-      <Post message="Here we go again.." />
-      <Post />
-      <Post />
+      <textarea
+        className={styles["my-posts__textarea"]}
+        value={profile.newPostText}
+        onChange={handlePostInputChange}
+      />
+      <button className={styles["my-posts__button"]} onClick={handlePostSubmit}>
+        Добавить пост
+      </button>
+      {profile.posts.map((post) => (
+        <Post key={post.id} message={post.message} id={post.id} />
+      ))}
     </div>
   );
 }
