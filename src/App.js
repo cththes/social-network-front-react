@@ -6,7 +6,7 @@ import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import { Routes, Route } from "react-router-dom";
 
-function App({ state, addPost, updatePostInput }) {
+function App({ state, dispatch }) {
   const profilePaths = ["/", "/profile", "/news", "/music", "/settings"];
   return (
     <div className="app">
@@ -18,18 +18,12 @@ function App({ state, addPost, updatePostInput }) {
             <Route
               key={path}
               path={path}
-              element={
-                <Profile
-                  profile={state.profile}
-                  addPost={addPost}
-                  updatePostInput={updatePostInput}
-                />
-              }
+              element={<Profile profile={state.profile} dispatch={dispatch} />}
             />
           ))}
           <Route
             path="/messages"
-            element={<Dialogs dialogs={state.dialogs} messages={state.messages} />}
+            element={<Dialogs dialogs={state.dialogs} dispatch={dispatch} />}
           />
         </Routes>
       </div>

@@ -1,14 +1,15 @@
 import React from "react";
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
+import { createAddPostAction, createPostInputChangeAction } from "../redux/profile-reducer";
 
-export default function MyPosts({ profile, addPost, updatePostInput }) {
-  const handlePostSubmit = () => {
-    addPost(profile.newPostText);
+export default function MyPosts({ profile, dispatch }) {
+  const handleAddPost = () => {
+    dispatch(createAddPostAction());
   };
 
   const handlePostInputChange = (e) => {
-    updatePostInput(e.target.value);
+    dispatch(createPostInputChangeAction(e.target.value));
   };
 
   return (
@@ -19,7 +20,7 @@ export default function MyPosts({ profile, addPost, updatePostInput }) {
         value={profile.newPostText}
         onChange={handlePostInputChange}
       />
-      <button className={styles["my-posts__button"]} onClick={handlePostSubmit}>
+      <button className={styles["my-posts__button"]} onClick={handleAddPost}>
         Добавить пост
       </button>
       {profile.posts.map((post) => (
