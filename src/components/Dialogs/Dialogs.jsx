@@ -2,16 +2,8 @@ import React from "react";
 import styles from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import { createSendMessageAction, createMessageInputChangeAction } from "../redux/dialogs-reducer";
 
-export default function Dialogs({ dialogs, dispatch }) {
-  const handleSendMessage = () => {
-    dispatch(createSendMessageAction());
-  };
-
-  const handleMessageInputChange = (e) => {
-    dispatch(createMessageInputChangeAction(e.target.value));
-  };
+export default function Dialogs({ dialogs, sendMessage, updateMessageInput }) {
   return (
     <div className={styles.dialogs}>
       <div className={styles.dialogs__items}>
@@ -28,9 +20,9 @@ export default function Dialogs({ dialogs, dispatch }) {
             className={styles.dialogs__textarea}
             placeholder="Написать сообщение..."
             value={dialogs.newMessageText}
-            onChange={handleMessageInputChange}
+            onChange={(e) => updateMessageInput(e.target.value)}
           ></textarea>
-          <button className={styles.dialogs__button} onClick={handleSendMessage}>
+          <button className={styles.dialogs__button} onClick={sendMessage}>
             Отправить
           </button>
         </div>

@@ -1,16 +1,29 @@
 const SEND_MESSAGE = "SEND-MESSAGE";
 const UPDATE_MESSAGE_INPUT = "UPDATE-MESSAGE-INPUT";
 
-const dialogsReducer = (state, action) => {
+let initialState = {
+  dialogs: [
+    { id: 1, name: "Андрей" },
+    { id: 2, name: "Мария" },
+    { id: 3, name: "Сергей" },
+    { id: 4, name: "Анна" },
+  ],
+  messages: [
+    { id: 1, message: "Привет! Как дела?" },
+    { id: 2, message: "Что нового?" },
+    { id: 3, message: "Давно не виделись!" },
+  ],
+  newMessageText: "",
+};
+
+const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SEND_MESSAGE:
       const text = state.newMessageText.trim();
       if (!text) return;
 
       let newPost = {
-        id: state.messages.length
-          ? state.messages[state.messages.length - 1].id + 1
-          : 1,
+        id: state.messages.length ? state.messages[state.messages.length - 1].id + 1 : 1,
         message: text,
       };
 
