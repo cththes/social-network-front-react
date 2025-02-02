@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import { Routes, Route } from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
 function App({ state, dispatch }) {
   const profilePaths = ["/", "/profile", "/news", "/music", "/settings"];
@@ -25,6 +26,7 @@ function App({ state, dispatch }) {
             path="/messages"
             element={<DialogsContainer dialogs={state.dialogs} dispatch={dispatch} />}
           />
+          <Route path="/users" element={<UsersContainer />} />
         </Routes>
       </div>
     </div>

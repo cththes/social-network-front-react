@@ -16,6 +16,11 @@ export default function Navbar() {
         </NavLink>
       </div>
       <div className={styles["navbar__nav-item"]}>
+        <NavLink to="/users" className={styles.navbar__link}>
+          Users
+        </NavLink>
+      </div>
+      <div className={styles["navbar__nav-item"]}>
         <NavLink to="/news" className={styles.navbar__link}>
           News
         </NavLink>
