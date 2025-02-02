@@ -1,7 +1,7 @@
-const SEND_MESSAGE = "SEND-MESSAGE";
-const UPDATE_MESSAGE_INPUT = "UPDATE-MESSAGE-INPUT";
+const SEND_MESSAGE = "SEND_MESSAGE";
+const UPDATE_MESSAGE_INPUT = "UPDATE_MESSAGE_INPUT";
 
-let initialState = {
+const initialState = {
   dialogs: [
     { id: 1, name: "Андрей" },
     { id: 2, name: "Мария" },
@@ -18,30 +18,25 @@ let initialState = {
 
 const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SEND_MESSAGE:
+    case SEND_MESSAGE: {
       const text = state.newMessageText.trim();
-      if (!text) return;
+      if (!text) return state;
 
-      let newPost = {
-        id: state.messages.length ? state.messages[state.messages.length - 1].id + 1 : 1,
-        message: text,
+      return {
+        ...state,
+        messages: [...state.messages, { id: Date.now(), message: text }],
+        newMessageText: "",
       };
-
-      state.messages.push(newPost);
-      state.newMessageText = "";
-      return state;
+    }
     case UPDATE_MESSAGE_INPUT:
-      if (state.newMessageText !== action.value) {
-        state.newMessageText = action.value;
-      }
-      return state;
+      return { ...state, newMessageText: action.value };
+
     default:
       return state;
   }
 };
 
-export let createSendMessageAction = () => ({ type: SEND_MESSAGE });
-
-export let createMessageInputChangeAction = (value) => ({ type: UPDATE_MESSAGE_INPUT, value });
+export const createSendMessageAction = () => ({ type: SEND_MESSAGE });
+export const createMessageInputChangeAction = (value) => ({ type: UPDATE_MESSAGE_INPUT, value });
 
 export default dialogsReducer;

@@ -6,19 +6,10 @@ import store from "./components/redux/store";
 import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
-let updateUI = () => {
-  root.render(
-    <Provider store={store}>
-      <BrowserRouter>
-        <App state={store.getState()} dispatch={store.dispatch.bind(store)} />
-      </BrowserRouter>
-    </Provider>
-  );
-};
-
-updateUI(store.getState());
-
-store.subscribe(() => {
-  updateUI(store.getState);
-});
+root.render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <App state={store.getState()} dispatch={store.dispatch.bind(store)} />
+    </BrowserRouter>
+  </Provider>
+);

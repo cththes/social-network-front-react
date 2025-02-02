@@ -1,7 +1,7 @@
-const ADD_POST = "ADD-POST";
-const UPDATE_POST_INPUT = "UPDATE-POST-INPUT";
+const ADD_POST = "ADD_POST";
+const UPDATE_POST_INPUT = "UPDATE_POST_INPUT";
 
-let initialState = {
+const initialState = {
   posts: [
     { id: 1, message: "Tomorrow can take care of itself." },
     { id: 2, message: "Here we go again.." },
@@ -13,30 +13,25 @@ let initialState = {
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_POST:
+    case ADD_POST: {
       const text = state.newPostText.trim();
-      if (!text) return;
+      if (!text) return state;
 
-      let newPost = {
-        id: state.posts.length ? state.posts[state.posts.length - 1].id + 1 : 1,
-        message: text,
+      return {
+        ...state,
+        posts: [...state.posts, { id: Date.now(), message: text }],
+        newPostText: "",
       };
-
-      state.posts.push(newPost);
-      state.newPostText = "";
-      return state;
+    }
     case UPDATE_POST_INPUT:
-      if (state.newPostText !== action.value) {
-        state.newPostText = action.value;
-      }
-      return state;
+      return { ...state, newPostText: action.value };
+
     default:
       return state;
   }
 };
 
-export let createAddPostAction = () => ({ type: ADD_POST });
-
-export let createPostInputChangeAction = (value) => ({ type: UPDATE_POST_INPUT, value });
+export const createAddPostAction = () => ({ type: ADD_POST });
+export const createPostInputChangeAction = (value) => ({ type: UPDATE_POST_INPUT, value });
 
 export default profileReducer;
