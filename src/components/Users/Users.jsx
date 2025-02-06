@@ -1,37 +1,45 @@
 import React from "react";
 import styles from "./Users.module.css";
+import axios from "axios";
+import user_avatar from "./../../assets/images/user-avatar.jpg";
 
-export default function Users({ users, follow, unfollow, setUsers }) {
-  if (users.length === 0) setUsers(users);
-  return (
-    <div className={styles.users}>
-      {users.map((user) => (
-        <div key={user.id} className={styles.user}>
-          <div className={styles.user__avatarWrapper}>
-            <img className={styles.user__avatar} src={user.photoUrl} alt={user.fullName} />
-          </div>
-          <div className={styles.user__info}>
-            <div className={styles.user__details}>{user.fullName}</div>
-            <div className={styles.user__status}>{user.status}</div>
-            {user.location.city ? (
-              <div className={styles.user__location}>
-                {user.location.city}, {user.location.country}
-              </div>
+class Users extends React.Component {
+  componentDidMount() {
+    axios
+      .get("https://social-network.samuraijs.com/api/1.0/users")
+      .then((response) => this.props.setUsers(response.data.items));
+  }
+  render() {
+    const { users, follow, unfollow } = this.props;
+    return (
+      <div className={styles.users}>
+        {users.map((user) => (
+          <div key={user.id} className={styles.user}>
+            <div className={styles.user__avatarWrapper}>
+              <img
+                className={styles.user__avatar}
+                src={user.photos?.small || user_avatar}
+                alt={user.name}
+              />
+            </div>
+            <div className={styles.user__info}>
+              <div className={styles.user__details}>{user.name}</div>
+              <div className={styles.user__status}>{user.status}</div>
+            </div>
+            {user.followed ? (
+              <button className={styles.user__button} onClick={() => unfollow(user.id)}>
+                Unfollow
+              </button>
             ) : (
-              <div className={styles.user__location}>{user.location.country}</div>
+              <button className={styles.user__button} onClick={() => follow(user.id)}>
+                Follow
+              </button>
             )}
           </div>
-          {user.followed ? (
-            <button className={styles.user__button} onClick={() => unfollow(user.id)}>
-              Unfollow
-            </button>
-          ) : (
-            <button className={styles.user__button} onClick={() => follow(user.id)}>
-              Follow
-            </button>
-          )}
-        </div>
-      ))}
-    </div>
-  );
+        ))}
+      </div>
+    );
+  }
 }
+
+export default Users;
