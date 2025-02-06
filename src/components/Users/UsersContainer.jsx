@@ -1,26 +1,28 @@
 import React from "react";
-import Users from "./Users";
 import { connect } from "react-redux";
-import { createFollowAction, createSetUsersAction, createUnfollowAction } from "../redux/users-reducer";
+import Users from "./Users";
+import {
+  followAction,
+  unfollowAction,
+  setUsersAction,
+  setCurrentPageAction,
+  setTotalUsersCountAction,
+} from "../redux/users-reducer";
 
-let mapStateToProps = (state) => {
-  return {
-    users: state.usersPage.users,
-  };
-};
+const mapStateToProps = (state) => ({
+  users: state.usersPage.users,
+  pageSize: state.usersPage.pageSize,
+  totalUsersCount: state.usersPage.totalUsersCount,
+  currentPage: state.usersPage.currentPage,
+});
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    follow: (userId) => {
-      dispatch(createFollowAction(userId));
-    },
-    unfollow: (userId) => {
-      dispatch(createUnfollowAction(userId));
-    },
-    setUsers: (users) => {
-      dispatch(createSetUsersAction(users));
-    },
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  follow: (userId) => dispatch(followAction(userId)),
+  unfollow: (userId) => dispatch(unfollowAction(userId)),
+  setUsers: (users) => dispatch(setUsersAction(users)),
+  setCurrentPage: (page) => dispatch(setCurrentPageAction(page)),
+  setTotalUsersCount: (totalCount) =>
+    dispatch(setTotalUsersCountAction(totalCount)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Users);
