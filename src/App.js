@@ -18,7 +18,7 @@ function App({ state, dispatch }) {
           {profilePaths.map((path) => (
             <Route
               key={path}
-              path={path}
+              path={path === "/profile" ? "/profile/:userId?" : path}
               element={<Profile profile={state.profile} dispatch={dispatch} />}
             />
           ))}

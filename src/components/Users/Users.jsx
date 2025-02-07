@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Users.module.css";
 import userAvatar from "../../assets/images/user-avatar.jpg";
 import Preloader from "../Common/Preloader";
+import { NavLink } from "react-router-dom";
 
 let Users = ({
   users,
@@ -17,7 +18,6 @@ let Users = ({
   const pages = Array.from({ length: pagesCount }, (_, i) => i + 1);
   return (
     <div className={styles.users}>
-      {isFetching && <Preloader />}
       {/* Пагинация */}
       <div className={styles.users__pagination}>
         {pages.map((page) => (
@@ -33,15 +33,19 @@ let Users = ({
         ))}
       </div>
 
+      {isFetching && <Preloader />}
+
       {/* Список пользователей */}
       {users.map((user) => (
         <div key={user.id} className={styles.users__item}>
           <div className={styles.users__avatarWrapper}>
-            <img
-              className={styles.users__avatar}
-              src={user.photos?.small || userAvatar}
-              alt={user.name}
-            />
+            <NavLink to={"/profile/" + user.id}>
+              <img
+                className={styles.users__avatar}
+                src={user.photos?.small || userAvatar}
+                alt={user.name}
+              />
+            </NavLink>
           </div>
           <div className={styles.users__info}>
             <div className={styles.users__name}>{user.name}</div>

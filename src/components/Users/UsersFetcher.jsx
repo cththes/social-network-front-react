@@ -27,20 +27,7 @@ class UsersFetcher extends React.Component {
   };
 
   render() {
-    const { users, currentPage, follow, unfollow, pageSize, totalUsersCount, isFetching } =
-      this.props;
-    return (
-      <Users
-        users={users}
-        currentPage={currentPage}
-        follow={follow}
-        unfollow={unfollow}
-        pageSize={pageSize}
-        totalUsersCount={totalUsersCount}
-        handlePageChange={this.handlePageChange}
-        isFetching={isFetching}
-      />
-    );
+    return <Users {...this.props} handlePageChange={this.handlePageChange} />;
   }
 }
 

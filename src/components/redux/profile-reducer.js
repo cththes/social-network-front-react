@@ -1,5 +1,6 @@
 const ADD_POST = "ADD_POST";
 const UPDATE_POST_INPUT = "UPDATE_POST_INPUT";
+const SET_USER_PROFILE = "SET_USER_PROFILE";
 
 const initialState = {
   posts: [
@@ -9,6 +10,7 @@ const initialState = {
     { id: 4, message: "" },
   ],
   newPostText: "",
+  profile: null,
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -25,7 +27,8 @@ const profileReducer = (state = initialState, action) => {
     }
     case UPDATE_POST_INPUT:
       return { ...state, newPostText: action.value };
-
+    case SET_USER_PROFILE:
+      return { ...state, profile: action.profile };
     default:
       return state;
   }
@@ -33,5 +36,6 @@ const profileReducer = (state = initialState, action) => {
 
 export const createAddPostAction = () => ({ type: ADD_POST });
 export const createPostInputChangeAction = (value) => ({ type: UPDATE_POST_INPUT, value });
+export const setUserProfileAction = (profile) => ({ type: SET_USER_PROFILE, profile });
 
 export default profileReducer;

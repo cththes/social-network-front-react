@@ -1,4 +1,4 @@
-.profile__content {
+.profile-content {
   grid-area: content;
   display: flex;
   flex-direction: column;
@@ -9,9 +9,4 @@
   border: 1px solid #bdc3c7;
   border-radius: 8px;
   overflow-y: auto;
-}
-
-.profile__main-content {
-  margin-bottom: 20px;
-  font-size: 18px;
 }
