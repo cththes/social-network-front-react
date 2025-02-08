@@ -1,12 +1,21 @@
-.profile-content {
-  grid-area: content;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Распределение контента: верх и низ */
-  background-color: #ecf0f1;
-  color: #2c3e50;
+.profile-wrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
   padding: 20px;
+  background-color: #ecf0f1;
+}
+
+.profile-content {
+  background-color: #ffffff;
   border: 1px solid #bdc3c7;
   border-radius: 8px;
-  overflow-y: auto;
+  padding: 20px;
+}
+
+.profile-details {
+  background-color: #ffffff;
+  border: 1px solid #bdc3c7;
+  border-radius: 8px;
+  padding: 20px;
 }

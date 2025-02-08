@@ -4,10 +4,7 @@ const SET_USER_PROFILE = "SET_USER_PROFILE";
 
 const initialState = {
   posts: [
-    { id: 1, message: "Tomorrow can take care of itself." },
-    { id: 2, message: "Here we go again.." },
-    { id: 3, message: "" },
-    { id: 4, message: "" },
+    { id: 1, message: "Here we go again.." },
   ],
   newPostText: "",
   profile: null,

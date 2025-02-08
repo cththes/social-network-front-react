@@ -1,0 +1,114 @@
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 20px;
+  border: 1px solid #bdc3c7;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  line-height: 1.6;
+  color: #2c3e50;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Центрируем аватар */
+.profile-details__avatar-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.profile-details__avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #34495e;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.profile-details__avatar:hover {
+  transform: scale(1.05);
+}
+
+/* Блок с текстовой информацией */
+.profile-details__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* Заголовок профиля */
+.profile-details__title {
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #34495e;
+  align-self: center;
+}
+
+/* Обычный текст */
+.profile-details__text {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Лейблы для заголовков в тексте */
+.profile-details__label {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* Заголовок "Contacts" */
+.profile-details__contacts-heading {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 15px;
+  color: #2c3e50;
+}
+
+/* Контакты */
+.profile-details__contacts-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-details__contacts-item {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 480px) {
+  .profile-details {
+    padding: 15px;
+  }
+
+  .profile-details__avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-details__title {
+    font-size: 16px;
+  }
+
+  .profile-details__text {
+    font-size: 13px;
+  }
+
+  .profile-details__contacts-heading {
+    font-size: 14px;
+  }
+}
