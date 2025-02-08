@@ -20,4 +20,3 @@ export default function MyPosts({ profile, updatePostInput, addPost }) {
     </div>
   );
 }
-

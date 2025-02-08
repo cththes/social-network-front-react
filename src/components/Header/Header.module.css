@@ -1,4 +1,4 @@
-.header__container {
+.header {
   grid-area: header;
   display: flex;
   align-items: center;
@@ -8,8 +8,27 @@
   padding: 10px 20px;
 }
 
+/* Лого */
 .header__logo {
   height: 50px;
   width: 50px;
   object-fit: contain;
+}
+
+/* Блок логина */
+.header__login {
+  margin-left: auto; /* Прижимает логин вправо */
+}
+
+.header__loginLink {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.header__loginLink:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }

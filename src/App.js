@@ -1,18 +1,18 @@
 import React from "react";
 import "./App.css";
-import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import { Routes, Route } from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 function App({ state, dispatch }) {
   const profilePaths = ["/", "/profile", "/news", "/music", "/settings"];
   return (
     <div className="app">
       <div className="app__wrapper">
-        <Header />
+        <HeaderContainer />
         <Navbar />
         <Routes>
           {profilePaths.map((path) => (
