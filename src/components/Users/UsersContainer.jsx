@@ -8,7 +8,7 @@ import {
   setCurrentPageAction,
   setTotalUsersCountAction,
   setIsFetchingAction,
-} from "../redux/users-reducer";
+} from "../../redux/users-reducer";
 
 const mapStateToProps = (state) => ({
   users: state.usersPage.users,

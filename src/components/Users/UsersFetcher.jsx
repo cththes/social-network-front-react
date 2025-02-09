@@ -1,35 +1,31 @@
 import React from "react";
-import axios from "axios";
 import Users from "./Users";
+import { usersAPI } from "../../api";
 
 class UsersFetcher extends React.Component {
   componentDidMount() {
     this.props.setIsFetching(true);
-    this.fetchUsers(this.props.currentPage);
+    this.getUsers(this.props.currentPage);
   }
 
-  fetchUsers = (page) => {
+  getUsers = (page) => {
     const { pageSize } = this.props;
-    axios
-      .get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${pageSize}`, {
-        withCredentials: true,
-      })
-      .then((response) => {
-        this.props.setIsFetching(false);
-        this.props.setUsers(response.data.items);
-        this.props.setTotalUsersCount(response.data.totalCount);
-      });
+    usersAPI.getUsers(page, pageSize).then((data) => {
+      this.props.setIsFetching(false);
+      this.props.setUsers(data.items);
+      this.props.setTotalUsersCount(data.totalCount);
+    });
   };
 
-  handlePageChange = (page) => {
+  onPageChange = (page) => {
     this.props.setCurrentPage(page);
     this.props.setIsFetching(true);
-    this.fetchUsers(page);
+    this.getUsers(page);
     this.props.setIsFetching(false);
   };
 
   render() {
-    return <Users {...this.props} handlePageChange={this.handlePageChange} />;
+    return <Users {...this.props} onPageChange={this.onPageChange} />;
   }
 }
 

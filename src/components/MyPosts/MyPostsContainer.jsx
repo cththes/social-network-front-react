@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createAddPostAction, createPostInputChangeAction } from "../redux/profile-reducer";
+import { createAddPostAction, createPostInputChangeAction } from "../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
 
 function MyPostsContainer({ profile, addPost, updatePostInput }) {

@@ -1,23 +1,20 @@
-// Profile.jsx
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import axios from "axios";
 import styles from "./Profile.module.css";
 import MyPostsContainer from "../MyPosts/MyPostsContainer";
 import ProfileDetails from "./ProfileDetails/ProfileDetails";
-import { setUserProfileAction } from "../redux/profile-reducer";
+import { setUserProfileAction } from "../../redux/profile-reducer";
+import { profileAPI } from "../../api";
 
 function Profile({ profile, setUserProfile }) {
   const { userId } = useParams();
   const id = userId || 21740;
 
   useEffect(() => {
-    axios
-      .get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
-      .then((response) => {
-        setUserProfile(response.data);
-      });
+    profileAPI.getUserProfile(id).then((data) => {
+      setUserProfile(data);
+    });
   }, [id, setUserProfile]);
 
   return (

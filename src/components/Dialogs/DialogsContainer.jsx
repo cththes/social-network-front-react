@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createSendMessageAction, createMessageInputChangeAction } from "../redux/dialogs-reducer";
+import { createSendMessageAction, createMessageInputChangeAction } from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 
 function DialogsContainer({ dialogs, sendMessage, updateMessageInput }) {
