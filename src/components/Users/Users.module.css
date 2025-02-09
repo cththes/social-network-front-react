@@ -49,7 +49,7 @@
 }
 
 /* Аватар пользователя */
-.users__avatarWrapper {
+.users__avatar-wrapper {
   flex-shrink: 0;
 }
 

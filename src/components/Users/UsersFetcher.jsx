@@ -11,7 +11,9 @@ class UsersFetcher extends React.Component {
   fetchUsers = (page) => {
     const { pageSize } = this.props;
     axios
-      .get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${pageSize}`)
+      .get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${pageSize}`, {
+        withCredentials: true,
+      })
       .then((response) => {
         this.props.setIsFetching(false);
         this.props.setUsers(response.data.items);

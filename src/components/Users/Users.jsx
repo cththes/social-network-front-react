@@ -3,19 +3,54 @@ import styles from "./Users.module.css";
 import userAvatar from "../../assets/images/user-avatar.jpg";
 import Preloader from "../Common/Preloader";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
-let Users = ({
+const Users = ({
   users,
   currentPage,
   follow,
   unfollow,
   pageSize,
   totalUsersCount,
-  handlePageChange,
+  onPageChange,
   isFetching,
 }) => {
   const pagesCount = 15 || Math.ceil(totalUsersCount / pageSize);
   const pages = Array.from({ length: pagesCount }, (_, i) => i + 1);
+
+  const handleUnfollow = (userId) => {
+    axios
+      .delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {
+        withCredentials: true,
+        headers: {
+          "API-KEY": process.env.REACT_APP_API_KEY,
+        },
+      })
+      .then((response) => {
+        if (response.data.resultCode === 0) {
+          unfollow(userId);
+        }
+      });
+  };
+
+  const handleFollow = (userId) => {
+    axios
+      .post(
+        `https://social-network.samuraijs.com/api/1.0/follow/${userId}`,
+        {},
+        {
+          withCredentials: true,
+          headers: {
+            "API-KEY": process.env.REACT_APP_API_KEY,
+          },
+        }
+      )
+      .then((response) => {
+        if (response.data.resultCode === 0) {
+          follow(userId);
+        }
+      });
+  };
   return (
     <div className={styles.users}>
       {/* Пагинация */}
@@ -26,7 +61,7 @@ let Users = ({
             className={`${styles.users__page} ${
               currentPage === page ? styles["users__page--active"] : ""
             }`}
-            onClick={() => handlePageChange(page)}
+            onClick={() => onPageChange(page)}
           >
             {page}
           </span>
@@ -38,8 +73,8 @@ let Users = ({
       {/* Список пользователей */}
       {users.map((user) => (
         <div key={user.id} className={styles.users__item}>
-          <div className={styles.users__avatarWrapper}>
-            <NavLink to={"/profile/" + user.id}>
+          <div className={styles["users__avatar-wrapper"]}>
+            <NavLink to={`/profile/${user.id}`}>
               <img
                 className={styles.users__avatar}
                 src={user.photos?.small || userAvatar}
@@ -55,7 +90,7 @@ let Users = ({
             className={`${styles.users__button} ${
               user.followed ? styles["users__button--unfollow"] : styles["users__button--follow"]
             }`}
-            onClick={() => (user.followed ? unfollow(user.id) : follow(user.id))}
+            onClick={() => (user.followed ? handleUnfollow(user.id) : handleFollow(user.id))}
           >
             {user.followed ? "Unfollow" : "Follow"}
           </button>
