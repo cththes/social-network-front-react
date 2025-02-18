@@ -4,6 +4,7 @@ const SET_USERS = "SET_USERS";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
 const SET_IS_FETCHING = "SET_IS_FETCHING";
+const SET_FOLLOWING_IN_PROGRESS = "SET_FOLLOWING_IN_PROGRESS";
 
 const initialState = {
   users: [],
@@ -11,6 +12,7 @@ const initialState = {
   totalUsersCount: 0,
   currentPage: 1,
   isFetching: false,
+  isFollowingInProgress: [],
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -49,6 +51,14 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         isFetching: action.isFetching,
       };
+    case SET_FOLLOWING_IN_PROGRESS:
+      return {
+        ...state,
+        isFollowingInProgress: action.isFetching
+          ? [...new Set([...state.isFollowingInProgress, action.userId])] // Убираем дубли
+          : state.isFollowingInProgress.filter((id) => id !== action.userId), // Удаляем, если процесс завершен
+      };
+
     default:
       return state;
   }
@@ -63,5 +73,10 @@ export const setTotalUsersCountAction = (totalUsersCount) => ({
   totalUsersCount,
 });
 export const setIsFetchingAction = (isFetching) => ({ type: SET_IS_FETCHING, isFetching });
+export const setIsFollowingProgress = (userId, isFetching) => ({
+  type: SET_FOLLOWING_IN_PROGRESS,
+  userId,
+  isFetching,
+});
 
 export default usersReducer;

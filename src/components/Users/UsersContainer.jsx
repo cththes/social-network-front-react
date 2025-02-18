@@ -8,6 +8,7 @@ import {
   setCurrentPageAction,
   setTotalUsersCountAction,
   setIsFetchingAction,
+  setIsFollowingProgress,
 } from "../../redux/users-reducer";
 
 const mapStateToProps = (state) => ({
@@ -16,6 +17,7 @@ const mapStateToProps = (state) => ({
   totalUsersCount: state.usersPage.totalUsersCount,
   currentPage: state.usersPage.currentPage,
   isFetching: state.usersPage.isFetching,
+  isFollowingInProgress: state.usersPage.isFollowingInProgress,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -25,6 +27,8 @@ const mapDispatchToProps = (dispatch) => ({
   setCurrentPage: (page) => dispatch(setCurrentPageAction(page)),
   setTotalUsersCount: (totalCount) => dispatch(setTotalUsersCountAction(totalCount)),
   setIsFetching: (isFetching) => dispatch(setIsFetchingAction(isFetching)),
+  setIsFollowingProgress: (isFollowingInProgress, userId) =>
+    dispatch(setIsFollowingProgress(isFollowingInProgress, userId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersFetcher);

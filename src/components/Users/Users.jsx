@@ -14,25 +14,36 @@ const Users = ({
   totalUsersCount,
   onPageChange,
   isFetching,
+  setIsFollowingProgress,
+  isFollowingInProgress,
 }) => {
   const pagesCount = 15 || Math.ceil(totalUsersCount / pageSize);
   const pages = Array.from({ length: pagesCount }, (_, i) => i + 1);
 
-  const handleUnfollow = (userId) => {
-    usersAPI.unfollow(userId).then((resultCode) => {
-      if (resultCode === 0) {
-        unfollow(userId);
-      }
-    });
-  };
-
   const handleFollow = (userId) => {
+    if (isFollowingInProgress.includes(userId)) return; // Предотвращаем повторный клик
+
+    setIsFollowingProgress(userId, true);
     usersAPI.follow(userId).then((resultCode) => {
       if (resultCode === 0) {
         follow(userId);
       }
+      setIsFollowingProgress(userId, false);
     });
   };
+
+  const handleUnfollow = (userId) => {
+    if (isFollowingInProgress.includes(userId)) return; // Предотвращаем повторный клик
+
+    setIsFollowingProgress(userId, true);
+    usersAPI.unfollow(userId).then((resultCode) => {
+      if (resultCode === 0) {
+        unfollow(userId);
+      }
+      setIsFollowingProgress(userId, false);
+    });
+  };
+
   return (
     <div className={styles.users}>
       {/* Пагинация */}
@@ -72,6 +83,7 @@ const Users = ({
             className={`${styles.users__button} ${
               user.followed ? styles["users__button--unfollow"] : styles["users__button--follow"]
             }`}
+            disabled={isFollowingInProgress.includes(user.id)}
             onClick={() => (user.followed ? handleUnfollow(user.id) : handleFollow(user.id))}
           >
             {user.followed ? "Unfollow" : "Follow"}
